@@ -1,16 +1,14 @@
 package com.baejimeel.springboot.baewebapp.todo;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
+@Entity
 public class Todo {
-    private int id;
-    private String username;
-    @Size(min = 10, message = "error : plz10sen")
-    private String description;
-    private LocalDate targetDate;
-    private boolean done;
 
     public Todo(int id, String username, String description, LocalDate targetDate, boolean done) {
         super();
@@ -19,6 +17,19 @@ public class Todo {
         this.description = description;
         this.targetDate = targetDate;
         this.done = done;
+    }
+    @Id
+    @GeneratedValue
+    private int id;
+    private String username;
+    @Size(min = 10, message = "error : plz10sen")
+    private String description;
+    private LocalDate targetDate;
+    private boolean done;
+
+
+    public Todo() {
+
     }
 
     public int getId() {

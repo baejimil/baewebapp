@@ -12,20 +12,23 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-//@Controller
+@Controller
 @SessionAttributes("name")
-public class TodoController {
+public class TodoControllerJPA {
 
-    public TodoController(TodoService todoService) {
+    public TodoControllerJPA(TodoService todoService, TodoRepository todoRepository) {
         super();
         this.todoService = todoService;
+        this.todoRepository = todoRepository;
     }
     private TodoService todoService;
+
+    private TodoRepository todoRepository;
 
     @GetMapping("list-todos")
     public String listAllTodos(ModelMap model){
         String username = getLoggedInUsername(model);
-        List<Todo> todos = todoService.findByUsername(username);
+        List<Todo> todos = todoRepository.findByUsername(username);
         model.addAttribute("todos",todos);
         return "listTodos";
     }
